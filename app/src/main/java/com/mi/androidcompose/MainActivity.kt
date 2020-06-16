@@ -3,6 +3,7 @@ package com.mi.androidcompose
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.Composable
+import androidx.compose.state
 import androidx.ui.core.ContentScale
 import androidx.ui.core.Modifier
 import androidx.ui.core.clip
@@ -12,6 +13,7 @@ import androidx.ui.foundation.Text
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.layout.*
+import androidx.ui.material.Button
 import androidx.ui.material.Divider
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.Typography
@@ -36,6 +38,9 @@ class MainActivity : AppCompatActivity() {
             val imageModifier = Modifier.preferredHeightIn(maxHeight = 180.dp)
                 .fillMaxWidth()
                 .clip(shape = RoundedCornerShape(8.dp))
+
+            val count = state { 0 }
+
             Column(modifier = Modifier.padding(16.dp)) {
                 Image(
                     modifier = imageModifier,
@@ -51,19 +56,24 @@ class MainActivity : AppCompatActivity() {
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
-                showItems(
+                Items(
                     listOf(
                         "Davenport, California",
                         "December 2018"
                     )
                     , typography = typography
                 )
+                Spacer(modifier = Modifier.preferredHeight(16.dp))
+                Counter(count = count.value,
+                    updateCount = { newCount ->
+                        count.value = newCount
+                    })
             }
         }
     }
 
     @Composable
-    fun showItems(items: List<String>, typography: Typography) {
+    fun Items(items: List<String>, typography: Typography) {
         Column {
             for (item in items) {
                 Text(
@@ -72,6 +82,13 @@ class MainActivity : AppCompatActivity() {
                 )
                 Divider(color = Color.Black)
             }
+        }
+    }
+
+    @Composable
+    fun Counter(count: Int, updateCount: (Int) -> Unit) {
+        Button(onClick = { updateCount(count + 1) }) {
+            Text("I've been clicked ${count} times")
         }
     }
 
