@@ -8,15 +8,14 @@ import androidx.ui.core.ContentScale
 import androidx.ui.core.Modifier
 import androidx.ui.core.clip
 import androidx.ui.core.setContent
+import androidx.ui.foundation.Box
+import androidx.ui.foundation.ContentGravity
 import androidx.ui.foundation.Image
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.layout.*
-import androidx.ui.material.Button
-import androidx.ui.material.Divider
-import androidx.ui.material.MaterialTheme
-import androidx.ui.material.Typography
+import androidx.ui.material.*
 import androidx.ui.res.imageResource
 import androidx.ui.text.style.TextOverflow
 import androidx.ui.tooling.preview.Preview
@@ -33,41 +32,43 @@ class MainActivity : AppCompatActivity() {
     @Composable
     fun NewsStory() {
         MaterialTheme {
-            val typography = MaterialTheme.typography
-            val image = imageResource(id = R.drawable.header)
-            val imageModifier = Modifier.preferredHeightIn(maxHeight = 180.dp)
-                .fillMaxWidth()
-                .clip(shape = RoundedCornerShape(8.dp))
+            Surface(color = Color.Yellow) {
+                val typography = MaterialTheme.typography
+                val image = imageResource(id = R.drawable.header)
+                val imageModifier = Modifier.preferredHeightIn(maxHeight = 180.dp)
+                    .fillMaxWidth()
+                    .clip(shape = RoundedCornerShape(8.dp))
 
-            val count = state { 0 }
-
-            Column(modifier = Modifier.padding(16.dp)) {
-                Image(
-                    modifier = imageModifier,
-                    contentScale = ContentScale.Crop,
-                    asset = image
-                )
-                Spacer(modifier = Modifier.preferredHeight(16.dp))
-                Text(
-                    "A day wandering through the sandhills " +
-                            "in Shark Fin Cove, and a few of the " +
-                            "sights I saw",
-                    style = typography.h6,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
-                )
-                Items(
-                    listOf(
-                        "Davenport, California",
-                        "December 2018"
-                    )
-                    , typography = typography
-                )
-                Spacer(modifier = Modifier.preferredHeight(16.dp))
-                Counter(count = count.value,
-                    updateCount = { newCount ->
-                        count.value = newCount
-                    })
+                val count = state { 0 }
+                Column(modifier = Modifier.fillMaxHeight()) {
+                    Column(modifier = Modifier.padding(16.dp).weight(1f)) {
+                        Image(
+                            modifier = imageModifier,
+                            contentScale = ContentScale.Crop,
+                            asset = image
+                        )
+                        Spacer(modifier = Modifier.preferredHeight(16.dp))
+                        Text(
+                            "A day wandering through the sandhills " +
+                                    "in Shark Fin Cove, and a few of the " +
+                                    "sights I saw",
+                            style = typography.h6,
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                        Items(
+                            listOf(
+                                "Davenport, California",
+                                "December 2018"
+                            )
+                            , typography = typography
+                        )
+                    }
+                    Counter(count = count.value,
+                        updateCount = { newCount ->
+                            count.value = newCount
+                        })
+                }
             }
         }
     }
@@ -87,8 +88,13 @@ class MainActivity : AppCompatActivity() {
 
     @Composable
     fun Counter(count: Int, updateCount: (Int) -> Unit) {
-        Button(onClick = { updateCount(count + 1) }) {
-            Text("I've been clicked ${count} times")
+        Box(Modifier.fillMaxWidth(), gravity = ContentGravity.Center, padding = 16.dp) {
+            Button(
+                onClick = { updateCount(count + 1) },
+                backgroundColor = if (count > 5) Color.Green else Color.White
+            ) {
+                Text("I've been clicked ${count} times")
+            }
         }
     }
 
