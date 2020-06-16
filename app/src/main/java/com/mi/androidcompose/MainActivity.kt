@@ -31,8 +31,8 @@ class MainActivity : AppCompatActivity() {
 
     @Composable
     fun NewsStory() {
-        MaterialTheme {
-            Surface(color = Color.Yellow) {
+        AppTheme {
+            Surface {
                 val typography = MaterialTheme.typography
                 val image = imageResource(id = R.drawable.header)
                 val imageModifier = Modifier.preferredHeightIn(maxHeight = 180.dp)
