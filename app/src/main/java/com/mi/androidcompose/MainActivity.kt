@@ -10,8 +10,11 @@ import androidx.ui.core.setContent
 import androidx.ui.foundation.Image
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
+import androidx.ui.graphics.Color
 import androidx.ui.layout.*
+import androidx.ui.material.Divider
 import androidx.ui.material.MaterialTheme
+import androidx.ui.material.Typography
 import androidx.ui.res.imageResource
 import androidx.ui.text.style.TextOverflow
 import androidx.ui.tooling.preview.Preview
@@ -48,14 +51,26 @@ class MainActivity : AppCompatActivity() {
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
+                showItems(
+                    listOf(
+                        "Davenport, California",
+                        "December 2018"
+                    )
+                    , typography = typography
+                )
+            }
+        }
+    }
+
+    @Composable
+    fun showItems(items: List<String>, typography: Typography) {
+        Column {
+            for (item in items) {
                 Text(
-                    "Davenport, California",
+                    item,
                     style = typography.body2
                 )
-                Text(
-                    "December 2018",
-                    style = typography.body2
-                )
+                Divider(color = Color.Black)
             }
         }
     }
