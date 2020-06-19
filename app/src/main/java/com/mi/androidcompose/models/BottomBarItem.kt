@@ -1,6 +1,5 @@
-package com.mi.androidcompose
+package com.mi.androidcompose.models
 
-import android.graphics.drawable.Icon
 import androidx.ui.graphics.vector.VectorAsset
 
 data class BottomBarItem(val title: String, val icon : VectorAsset)

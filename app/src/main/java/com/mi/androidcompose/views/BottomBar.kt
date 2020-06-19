@@ -1,4 +1,4 @@
-package com.mi.androidcompose
+package com.mi.androidcompose.views
 
 import android.widget.Toast
 import androidx.compose.Composable
@@ -10,56 +10,28 @@ import androidx.ui.foundation.Text
 import androidx.ui.foundation.shape.corner.CircleShape
 import androidx.ui.graphics.Color
 import androidx.ui.layout.Spacer
-import androidx.ui.material.*
+import androidx.ui.material.BottomAppBar
+import androidx.ui.material.BottomNavigationItem
 import androidx.ui.material.icons.Icons
-import androidx.ui.material.icons.filled.*
-import androidx.ui.unit.dp
-
-private val themeColors = lightColorPalette(
-    primary = Color.DarkGray,
-    surface = Color.DarkGray,
-    onSurface = Color.White
-)
+import androidx.ui.material.icons.filled.FavoriteBorder
+import androidx.ui.material.icons.filled.Home
+import androidx.ui.material.icons.filled.Settings
+import androidx.ui.material.icons.filled.Share
+import com.mi.androidcompose.models.BottomBarItem
 
 private val bottomBarItems = listOf(
     BottomBarItem("Home", Icons.Filled.Home),
-    BottomBarItem("Favorites", Icons.Filled.FavoriteBorder),
-    BottomBarItem("Settings", Icons.Filled.Settings),
+    BottomBarItem(
+        "Favorites",
+        Icons.Filled.FavoriteBorder
+    ),
+    BottomBarItem(
+        "Settings",
+        Icons.Filled.Settings
+    ),
     BottomBarItem("Share", Icons.Filled.Share)
 )
 
-@Composable
-fun AppTheme(content: @Composable() () -> Unit) {
-    MaterialTheme(colors = themeColors) {
-        val context = ContextAmbient.current
-
-        Scaffold(
-            topAppBar = { TopBar() },
-            bodyContent = { content() },
-            bottomAppBar = { fabConfiguration -> BottomBar(fabConfiguration) },
-            floatingActionButton = {
-                FloatingActionButton(
-                    contentColor = Color.White,
-                    backgroundColor = Color.DarkGray,
-                    icon = { Icon(Icons.Filled.Add) },
-                    shape = CircleShape,
-                    onClick = {
-                        Toast.makeText(context, "FAB", Toast.LENGTH_SHORT).show()
-                    }
-                )
-            },
-            floatingActionButtonPosition = Scaffold.FabPosition.CenterDocked
-        )
-    }
-}
-
-@Composable
-fun TopBar() {
-    TopAppBar(
-        title = { Text(text = "Articles") },
-        elevation = 12.dp
-    )
-}
 @Composable
 fun BottomBar(fabConfiguration: BottomAppBar.FabConfiguration?) {
     val selectedItem = state { 0 }
