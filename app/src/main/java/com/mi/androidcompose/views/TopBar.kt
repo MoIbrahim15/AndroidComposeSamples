@@ -48,6 +48,6 @@ fun TopBar(
                 }
             }
         },
-        elevation = 12.dp
+        elevation = 16.dp
     )
 }
