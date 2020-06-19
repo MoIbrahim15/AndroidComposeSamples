@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
                     modifier = Modifier.padding(0.dp, 8.dp, 0.dp, 8.dp)
                 )
                 if (index != items.size - 1)
-                    Divider(color = Color.Black)
+                    Divider(color = Color.White)
             }
         }
     }
