@@ -21,6 +21,13 @@ private val themeColors = lightColorPalette(
     onSurface = Color.White
 )
 
+private val bottomBarItems = listOf(
+    BottomBarItem("Home", Icons.Filled.Home),
+    BottomBarItem("Favorites", Icons.Filled.FavoriteBorder),
+    BottomBarItem("Settings", Icons.Filled.Settings),
+    BottomBarItem("Share", Icons.Filled.Share)
+)
+
 @Composable
 fun AppTheme(content: @Composable() () -> Unit) {
     MaterialTheme(colors = themeColors) {
@@ -29,7 +36,19 @@ fun AppTheme(content: @Composable() () -> Unit) {
         Scaffold(
             topAppBar = { TopBar() },
             bodyContent = { content() },
-            bottomAppBar = { BottomBar() }
+            bottomAppBar = { fabConfiguration -> BottomBar(fabConfiguration) },
+            floatingActionButton = {
+                FloatingActionButton(
+                    contentColor = Color.White,
+                    backgroundColor = Color.DarkGray,
+                    icon = { Icon(Icons.Filled.Add) },
+                    shape = CircleShape,
+                    onClick = {
+                        Toast.makeText(context, "FAB", Toast.LENGTH_SHORT).show()
+                    }
+                )
+            },
+            floatingActionButtonPosition = Scaffold.FabPosition.CenterDocked
         )
     }
 }
@@ -41,23 +60,17 @@ fun TopBar() {
         elevation = 12.dp
     )
 }
-
-val items = listOf(
-    BottomBarItem("Home", Icons.Filled.Home),
-    BottomBarItem("Favorites", Icons.Filled.FavoriteBorder),
-    BottomBarItem("Settings", Icons.Filled.Settings),
-    BottomBarItem("Share", Icons.Filled.Share)
-)
-
 @Composable
-fun BottomBar() {
+fun BottomBar(fabConfiguration: BottomAppBar.FabConfiguration?) {
     val selectedItem = state { 0 }
     BottomAppBar(
+        fabConfiguration = fabConfiguration,
+        cutoutShape = CircleShape,
         contentColor = Color.White,
         backgroundColor = Color.DarkGray
     ) {
         val context = ContextAmbient.current
-        items.forEachIndexed { index, item ->
+        bottomBarItems.forEachIndexed { index, item ->
             BottomNavigationItem(
                 icon = { Icon(item.icon) },
                 text = { Text(item.title) },
@@ -69,6 +82,9 @@ fun BottomBar() {
                 activeColor = Color.Gray,
                 inactiveColor = Color.White
             )
+            if (index + 1 == bottomBarItems.size / 2) {
+                Spacer(Modifier.weight(1f, true))
+            }
         }
     }
 }

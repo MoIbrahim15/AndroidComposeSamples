@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         "A day wandering through the sandhills in Shark Fin Cove, and a few of the sights I saw",
         mutableListOf("Davenport, California", "December 2018")
     )
-    private val items = mutableListOf(article, article, article)
+    private val articleItems = mutableListOf(article, article, article)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     fun NewsStory() {
         AppTheme {
             VerticalScroller {
-                for (item in items) {
+                for (item in articleItems) {
                     CardItem(item)
                 }
             }
