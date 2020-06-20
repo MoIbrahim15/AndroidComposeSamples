@@ -2,7 +2,7 @@
 An Android app which provides examples for Android Jetpack Compose
 
 
-![Home Screen](https://github.com/MoIbrahim15/AndroidComposeSamples/blob/master/screenshoots/screen1.png)
+![Home Screen](https://github.com/MoIbrahim15/AndroidComposeSamples/blob/master/screenshoots/screen1.jpg)
 
 # Branches:
 - [Example01](https://github.com/MoIbrahim15/AndroidComposeSamples/tree/Example01 "Example01") : Hello Android (TextView)
