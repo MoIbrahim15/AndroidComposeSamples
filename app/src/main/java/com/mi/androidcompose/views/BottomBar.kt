@@ -17,19 +17,19 @@ import androidx.ui.material.icons.filled.FavoriteBorder
 import androidx.ui.material.icons.filled.Home
 import androidx.ui.material.icons.filled.Settings
 import androidx.ui.material.icons.filled.Share
-import com.mi.androidcompose.models.BottomBarItem
+import com.mi.androidcompose.models.MenuItem
 
 private val bottomBarItems = listOf(
-    BottomBarItem("Home", Icons.Filled.Home),
-    BottomBarItem(
+    MenuItem("Home", Icons.Filled.Home),
+    MenuItem(
         "Favorites",
         Icons.Filled.FavoriteBorder
     ),
-    BottomBarItem(
+    MenuItem(
         "Settings",
         Icons.Filled.Settings
     ),
-    BottomBarItem("Share", Icons.Filled.Share)
+    MenuItem("Share", Icons.Filled.Share)
 )
 
 @Composable

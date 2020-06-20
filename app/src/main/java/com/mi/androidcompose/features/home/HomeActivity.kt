@@ -14,11 +14,16 @@ import com.mi.androidcompose.theme.AppTheme
 class HomeActivity : AppCompatActivity() {
 
     private val article = Article(
-        R.drawable.header,
+        R.drawable.aricle1,
         "A day wandering through the sandhills in Shark Fin Cove, and a few of the sights I saw",
         mutableListOf("Davenport, California", "December 2018")
     )
-    private val articleItems = mutableListOf(article, article, article)
+    private val article2 = Article(
+        R.drawable.aricle2,
+        "A day wandering through the sandhills in Shark Fin Cove, and a few of the sights I saw",
+        mutableListOf("Davenport, California", "December 2018")
+    )
+    private val articleItems = mutableListOf(article, article2)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
